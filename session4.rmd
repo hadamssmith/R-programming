@@ -1,0 +1,169 @@
+---
+title: "fourth_lecture"
+author: "Adam"
+date: "10/24/2019"
+output: html_document
+---
+
+```{r}
+library(ggplot2)
+dmd<-read.table("data/diamond.csv", header = T, dec = ".", sep = ",")
+head(dmd)[,1:5]
+```
+
+```{r}
+ggplot(dmd,aes(x = carat, y = price, colour=cut))+
+  geom_point()
+```
+
+```{r}
+ggplot(dmd, aes(x = carat, y = price,
+colour=cut))+geom_point()
+```
+
+```{r}
+p1<-ggplot(dmd,aes(x = carat,y = price))+ geom_point(aes(colour=cut,shape=cut, size=0.05))+ labs(title="Relationship between Price and Carat of Diamond", x="Carat ", y="Price")
+
+p1
+```
+
+
+```{r}
+p2<-ggplot(dmd, aes(x = carat, y = price))+ geom_point(aes(colour=color,shape=cut, size=0.05))+ labs(title="Relationship between Price and Carat of Diamond")+ scale_y_continuous(name= "Price ", limits = c(0,15000), breaks = seq(0, 15000, by = 3000))+ scale_x_continuous(name = "Carat ", limits = c(0,4), breaks = seq(0, 4, by = 0.5))
+suppressWarnings(print(p2))
+```
+
+```{r}
+p3<-ggplot(dmd, aes(x = carat, y = price))+ geom_point(aes(colour=color,shape=cut, size=0.05))+ labs(title="Relationship between Price and Carat of Diamond")+ scale_y_continuous(name= "Price ", limits = c(0,15000), breaks = seq(0, 15000, by = 3000))+ scale_x_continuous(name = "Carat ", limits = c(0,4), breaks = seq(0, 4, by = 0.5))+ scale_color_brewer(name = "Diamond Color", palette = "Set1")
+
+p3
+```
+
+```{r}
+p8<- ggplot(dmd, aes(x= carat, y = price))+ geom_point(aes(colour = cut, shape= cut,  size = 0.05))+ geom_smooth(method = "lm") + labs(tittle = "Relationship between price and carat of Diamond") + scale_y_continuous(name = "Price", limits = c(0,15000), breaks = seq(0,15000, by= 3000))+ scale_x_continuous(name = "carat", limits = c(0,4), breaks = seq(0,4, by = 0.5))+
+  scale_color_manual(name = "Diamond cut", values = c("blue","Orange","red", "purple","cyan"), labels = c("Fair","Good","Ideal", "Premium", "VG"))+ facet_grid(~cut)+theme_bw()
+
+p8
+
+```
+
+
+```{r}
+ggplot(dmd, aes(x = cut, fill = color))+ geom_bar()
+```
+
+
+```{r}
+ggplot(dmd, aes(x = cut, fill = color))+ geom_bar(position = "dodge")
+
+```
+
+
+```{r}
+ggplot(dmd, aes(y = price, x = cut)) + geom_boxplot()
+
+```
+
+```{r}
+ggplot(dmd, aes(y = price, x = cut)) + geom_jitter()
+
+```
+
+```{r}
+ggplot(dmd, aes(x = price)) + geom_histogram(color = "blue")+ labs(title = "Histogram of Price", x="Price",y="Frequency")+ facet_grid(~color)
+
+```
+
+
+```{r}
+ggplot(dmd, aes(x = price)) + geom_density(fill = "blue")+ facet_grid(color~.)
+
+gg```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+dta<-read_excel("data/mbta.xlsx", skip=1, range = cell_cols(2:60))
+
+
+```
+
+```{r}
+dta_tidy<-dta %>% gather('2007-01':'2011-10', key="year", value="passengers")
+
+dta_tidy
+```
+
+
+```{r}
+dta_tidy1<-dta_tidy%>%separate(year, into = c("year", "month"))
+dta_tidy1
+```
+
+
+
+```{r}
+dta_tidy2 <-dta_tidy1%>% filter(mode %in% c("Commuter Rail","Heavy Rail", "Light Rail"))
+dta_tidy2
+```
+
+```{r}
+
+dta_tidy3 <-dta_tidy1%>%spread(mode, passengers)
+dta_tidy3
+
+```
+
+```{r}
+dta_tidy4<-dta_tidy3%>%.[,c(1:2,6:8,10)]
+dta_tidy4
+```
+
+```{r}
+dta_tidy5<-dta_tidy4 %>% gather(`Commuter Rail`, `Private Bus`, key = "rail_type", value="passenger")
+
+dta_tidy5 
+```
+
+
+```{r}
+data(iris)
+glimpse(iris)
+view(iris)
+```
+
+```{r}
+f2 <- ggplot(iris,aes(x = Sepal.Length, y= Sepal.Width)) + geom_point(aes(colour = Species))+ scale_x_continuous(name = "width of iris")+ scale_y_continuous("length of iris")+labs(tittle ="Relatonship between Sepal_length & Sepal_Width") +theme_minimal() 
+f2
+```
+
+
+
+
+
+```{r}
+c2<- ggplot(iris,aes(x = Species, y = Sepal.Width))+ geom_boxplot(aes(fill="yellow"))
+c2
+```

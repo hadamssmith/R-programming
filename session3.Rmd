@@ -1,0 +1,102 @@
+---
+title: "session3"
+author: "Adam"
+date: "10/17/2019"
+output: html_document
+---
+
+
+```{r}
+library(readxl)
+library(tidyverse)
+dta<-read_excel("data/mbta.xlsx", skip=1, range = cell_cols(2:60))
+View(dta)
+```
+
+
+
+```{r}
+dta_tidy<-dta %>% gather('2007-01':'2011-10', key="year", value="passengers")
+dta_tidy
+```
+
+```{r}
+dta_tidy<-dta_tidy%>%separate(year, into = c("year", "month"))
+dta_tidy
+```
+
+
+```{r}
+dta_tidy <- dta_tidy %>% spread(mode, passengers)
+dta_tidy
+```
+
+
+```{r}
+dta_tidy1 <- dta_tidy %>% .[,c(1:2, 6:8)]
+dta_tidy1
+```
+
+```{r}
+dta_tidy2 <- dta_tidy1%>% filter(mode %in% c("comutter Rail","Light Rail", "Heavy Rail", "Light Rail"))
+                                 
+dta_tidy2
+```
+
+```{r}
+dta_tidy2 <- dta_tidy1 %>% gather('Commuter Rail':'Light Rail', key = "rail_type", value = "passengers")
+dta_tidy2
+```
+
+```{r}
+library(hflights)
+data("hflights")
+view(hflights)
+```
+
+```{r}
+fil <- filter(hflights, Year == 2011, Month == 2)
+fil
+```
+
+```{r}
+fil <- filter(hflights,Dest%in% c("FLL","IAH"))
+view(fil)
+```
+
+```{r}
+fil <- filter(hflights,Year ==2011, Month == 4) 
+view(fil)
+```
+
+```{r}
+filter(hflights, UniqueCarrier %in% c("AA", "WN"))
+```
+
+```{r}
+arr_1<-arrange(hflights, Year, Month)
+arr_1
+
+```
+
+```{r}
+arr_2 <-arrange(hflights, desc(ArrDelay))[,10:15]
+
+arr_2
+```
+
+```{r}
+sel_2 <- select(hflights, tail_num= TailNum, ArrTime30 = ArrTime)
+View(sel_2)
+```
+
+```{r}
+vars <- c("Years", "Month", "DAyofMonth", "ArrTime")
+s_1 <- select(hflights, one_of(vars))
+head(s_1)[1:6,]
+```
+
+```{r}
+
+```
+

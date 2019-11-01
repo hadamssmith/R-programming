@@ -1,0 +1,39 @@
+---
+title: "sample_T-test"
+author: "Adam"
+date: "10/31/2019"
+output: html_document
+---
+
+```{r}
+
+dat1 <- read.csv("data/diamond.csv", header = T,  sep = ",")
+dat1
+```
+
+```{r}
+dat2 <- read.csv("data/cancer.csv", header = T, sep = ",")
+dat2
+```
+
+```{r}
+dta3 <- read.csv("data/diamond.csv", header = T)
+
+ t.test(dta3$carat, mu = 0.4, alternative = "greater")
+```
+
+```{r}
+fv <- read.csv("data/cancer.csv", header = T)
+t.test(fv$area_se~fv$diagnosis,alternative="two.sided")
+
+```
+
+
+
+
+
+
+
+
+
+

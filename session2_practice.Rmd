@@ -1,0 +1,99 @@
+---
+title: "Session2"
+author: "Adam"
+date: "10/10/2019"
+output: html_document
+---
+
+```{r}
+#who<-read.table(file.choose(), header =T, sep = ",", dec ="," )
+#who<-read.table("data/who_suicide_statistics.csv", header = F, sep = ",", dec ="
+#auto<-read.table("data/auto.txt", header = F, sep = ",", dec ="." )
+potatoes<-read.table("data/potatoes.txt", header = T, sep = "\t", dec ="." )
+
+```
+
+```{r}
+View(potatoes)
+```
+
+```{r}
+library(readxl)
+```
+
+```{r}
+#head(who)[1:10, 1:4]
+#tail(who)[1:10, 1:4]
+#who[1:10, 1:4]
+View(auto)
+
+```
+
+```{r}
+names(auto)<-c("sym", "norm", "make", "fuel-type", "asp", "num_doors", "drive_wheel", "engine_loc", "wheel_base", "length", "width", "height", "curb_weight", "engine_type", "num_of_cylinders",
+ "engine-size", "fuel-system", "bore", "stroke", "compression-ratio", "horsepower", "peak-rpm", "city-mpg", "highway-mpg", "price")
+```
+
+```{r}
+View(auto)
+```
+
+```{r}
+library(readxl)
+```
+
+```{r}
+sht1 <- read_excel("data/Employees.xlsx", sheet = 1)
+sht1 <- read_excel("data/Employees.xlsx", sheet = 2)
+str(sht1)
+
+
+```
+
+```{r}
+library(DBI)
+library(RMySQL)
+```
+
+```{r}
+host <- "courses.csrrinzqubik.us-east-1.rds.amazonaws.com" 
+connect <- dbConnect(RMySQL::MySQL(), dbname = "tweater", host = host, port = 3306, user = "student",password = 'datacamp')
+```
+
+```{r}
+table <- dbListTables(connect)
+table
+```
+```{r}
+user_t <-dbReadTable(connect,"users")
+```
+
+```{r}
+View(user_t)
+```
+
+```{r}
+write.csv(user_t,file = "users.csv")
+```
+
+```{r}
+?write.csv
+```
+
+```{r}
+library(haven)
+```
+
+```{r}
+ach <- read_dta("data/alcohol.dta")
+str(ach)
+```
+```{r}
+hs <- read.csv(file.choose(), header = TRUE)
+```
+
+```{r}
+plot(hs$Bathroom, hs$Price, main = "Relationship between Price and Bathrooms", xlab="Price of the House")
+```
+
+

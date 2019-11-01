@@ -1,0 +1,34 @@
+---
+title: "Assignments"
+author: "Adam"
+date: "10/17/2019"
+output: html_document
+---
+
+```{r}
+diamond <- read.csv("data/diamond.csv", sep = "," ,header = T)
+
+```
+
+```{r}
+View(diamond)
+
+```
+
+```{r}
+plot(diamond$price, diamond$depth, main = "relationship betweem price and depth of diamond", xlab = "depth of diamond", ylab = "price of diamond")
+
+
+```
+
+```{r}
+boxplot(diamond$price~diamond$cut, main = "Boxplot of price on status",
+        xlab = "cut of diamond", ylab = "price of diamond")
+
+```
+
+
+```{r}
+ hist(diamond$price,  main = "Histogram Showing the Frequency against Price", xlab = "Price of Diamond", col = "Blue", border = "red" , breaks = 10)
+```
+

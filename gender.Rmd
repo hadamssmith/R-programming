@@ -1,0 +1,80 @@
+---
+title: "Gender"
+author: "Adam"
+date: "11/1/2019"
+output: html_document
+---
+```{r}
+ gender<- c ("Male","Female","Male","Female","Male",
+            "Female","Male","Female","Male","Female")
+            
+
+drink <- c("chocolate", "strawberry","strawberry",
+          "strawberry","chocolate","chocolate","chocolate",
+          "strawberry","strawberry","strawberry")
+
+dt <- data.frame(gender,drink)
+dt
+          
+```                      
+```{r}  
+dat <-table(dt)
+dat
+
+```
+``
+
+```{r}
+library(MASS)
+data("survey")
+survey
+
+```
+
+```{r}
+c1 <- table(survey$Exer,survey$Smoke)
+c1
+
+```
+
+```{r}
+write.csv(c1, file= "c1.csv")
+
+```
+
+```{r}
+ cht <- read.csv("data/diamond.csv", header = T)
+
+chisq.test(cht$color,cht$clarity)
+```
+
+```{r}
+a1<-aov(cht$price~cht$color)
+
+summary(a1)
+```
+
+```{r}
+TukeyHSD(a1)
+
+```
+
+```{r}
+data("iris")
+View(iris)
+levels(iris$Species)
+```
+
+```{r}
+dt <- aov(iris$Sepal.Length~iris$Species)
+
+summary(dt)
+
+```
+
+```{r}
+TukeyHSD(dt)
+```
+
+
+            
